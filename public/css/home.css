@@ -1,0 +1,44 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-image: url(../img/bg-img.png);
+  background-position: 0 -100px;
+  background-size: cover;
+}
+
+.container {
+  font-size: 30px;
+}
+.nav-link {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #f47522 !important;
+  font-weight: bold;
+}
+.active {
+  color: #f47522 !important;
+  font-weight: 700;
+}
+
+.img-profile {
+  margin-right: -300px;
+}
+.content {
+  color: #19345e;
+}
+.isi {
+  min-height: 600px;
+  min-width: 300px;
+}
+
+.btn-orange {
+  font-size: 16px;
+  color: white;
+  background-color: #f47522;
+  border-color: #f47522;
+}
