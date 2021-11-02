@@ -1,14 +1,11 @@
 import './App.css';
-import ContactUs from './ContactUs';
-import HomeBody from './HomeBody';
-import Navbar from './Navbar';
+import { todoMock } from './mockData'; 
+import ToDoPage from './Pages/ToDo/ToDoPage';
 
 function App() {
   return (
     <div className="App">
-      {/* <Navbar/>
-      <HomeBody/> */}
-      <ContactUs/>
+      <ToDoPage data={todoMock}/>
     </div>
   );
 }
