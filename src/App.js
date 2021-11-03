@@ -1,12 +1,9 @@
 import './App.css';
-import { todoMock } from './mockData'; 
-import ToDoPage from './Pages/ToDo/ToDoPage';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <ToDoPage data={todoMock}/>
-    </div>
+    <Home/>
   );
 }
 
