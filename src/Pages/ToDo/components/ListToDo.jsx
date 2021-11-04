@@ -1,7 +1,7 @@
 import style from './Components.module.css'
 import ToDo from "./ToDo"
 const ListToDo = (props) => {
-    const { data, deleteToDo, checkToDo, uncheckToDo } = props;
+    const { data, deleteToDo, toggleToDoStatus } = props;
 
     return (
         <div className={style.container}>
@@ -11,9 +11,8 @@ const ListToDo = (props) => {
                 <ToDo
                 key={content.id}
                 item={content}
-                deleteContent={deleteToDo}
-                checkContent={checkToDo}
-                uncheckContent={uncheckToDo}
+                deleteToDo={deleteToDo}
+                toggleToDoStatus={toggleToDoStatus}
                 />
             ))}
             </tbody>

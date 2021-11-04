@@ -1,6 +1,6 @@
 import style from './Components.module.css' 
 
-export default function ToDo({ item, deleteToDo, checkToDo, uncheckToDo }) {
+export default function ToDo({ item, deleteToDo, toggleToDoStatus }) {
     return (
         <tr className={style.row}>
             <td>
@@ -8,11 +8,7 @@ export default function ToDo({ item, deleteToDo, checkToDo, uncheckToDo }) {
                 style={{ cursor: "pointer" }}
                 defaultChecked={item.completed ? true : false}
                 type="checkbox"
-                onClick={
-                    item.completed
-                    ? () => uncheckToDo(item.id)
-                    : () => checkToDo(item.id)
-                }
+                onClick={() => toggleToDoStatus(item.id)}
                 />
             </td>
             <td

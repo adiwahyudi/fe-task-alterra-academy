@@ -1,28 +1,28 @@
-import { Component } from 'react'
 import style from './Components.module.css'
+import { useState } from "react"
 
-class InputToDo extends Component {
-    state = {
+function InputToDo (props){
+    const [data, setData] = useState({
         title: "",
         completed: false,
-    };
+    });
 
-    onChange = (e) => {
-        this.setState({
+    const onChange = (e) => {
+        setData({...data,
             [e.target.name]: e.target.value
         })
     }
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const isEmpty = this.state.title === "";
-        if (!isEmpty) {
+        const isEmpty = data.title
+        if (isEmpty) {
           const newData = {
-            title: this.state.title,
-            completed: this.state.completed,
+            title: data.title,
+            completed: data.completed,
           };
-          this.props.addToDo(newData);
-          this.setState({
+          props.addToDo(newData);
+          setData({
             title: "",
             completed: false,
           });
@@ -31,14 +31,12 @@ class InputToDo extends Component {
         }
       }
 
-      render() {
-          return (
-              <div className={style.inputContainer}>
-                  <input type="text" placeholder="Add todo.." name="title" className={style.input} value={this.state.title} onChange={this.onChange}/>
-                  <button onClick={this.handleSubmit} className={style.handleSubmit}>Submit</button>
-              </div>
-          )
-      }
+      return (
+          <div className={style.inputContainer}>
+              <input type="text" placeholder="Add todo.." name="title" className={style.input} value={data.title} onChange={onChange}/>
+              <button onClick={handleSubmit} className={style.handleSubmit}>Submit</button>
+          </div>
+      )
 }
 
 export default InputToDo    
