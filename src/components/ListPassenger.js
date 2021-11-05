@@ -1,21 +1,24 @@
-import ListItem from './ListItem'
-const ListPassenger = (props) => {
+import ListItem from "./ListItem"
 
-    const { data, hapusPengunjung } = props;
+const ListPassenger = (props) => {
+    const {data, hapusPengunjung} = props
+    
     return (
         <div>
-            <table cellPadding="5px" cellSpacing="0">
+            <h1>Daftar Pengunjung</h1>
+            <h3>Stasiun Denpasar</h3>
+            <table cellPadding="5px" cellSpacing="0" style={{margin: "auto"}}>
                 <thead bgcolor="red">
-                    <td>Nama</td>
-                    <td>Umur</td>
-                    <td>Jenis Kelamin</td>
+                    <td style={{border: "1px solid black"}}>Nama</td>
+                    <td style={{border: "1px solid black"}}>Umur</td>
+                    <td style={{border: "1px solid black"}}>Jenis Kelamin</td>
                 </thead>
                 <tbody>
-                    {data.map((passenger) => <ListItem key={passenger.id} item={passenger} hapusPengunjung={hapusPengunjung}/>)}
+                    {data.map((passenger) => <ListItem key={passenger.id} item ={passenger} hapusPengunjung={hapusPengunjung}/>)}
                 </tbody>
             </table>
         </div>
     )
 }
 
-export default ListPassenger;
+export default ListPassenger

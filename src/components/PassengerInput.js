@@ -1,87 +1,79 @@
-import { Component } from 'react'
+import { useState } from "react"
 
-class PassengerInput extends Component {
-    state = {
-        nama: "",
-        umur: "",
-        jenisKelamin:"Pria",
-        editing:true,
-    }
+function PassengerInput(props) {
+    const [data, setData] = useState({
+        nama : "",
+        umur : "",
+        jenisKelamin : "Pria"
+    })
 
-    onChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
+    const [editing, setEditing] = useState(true)
+
+    const onChange = e => {
+        setData({...data,
+            [e.target.name] : e.target.value
         })
     }
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        const formIsNotEmpty = this.state.nama && this.state.umur && this.state.jenisKelamin
-
-        if(formIsNotEmpty) {
+        const formIsNotEmpty = data.nama && data.umur && data.jenisKelamin
+        if (formIsNotEmpty) {
             const newData = {
-                nama: this.state.nama,
-                umur: this.state.umur,
-                jenisKelamin: this.state.jenisKelamin,
+                nama : data.nama,
+                umur : data.umur,
+                jenisKelamin : data.jenisKelamin
             }
-            this.props.tambahPengunjung(newData);
-            this.setState({
+
+            props.tambahPengunjung(newData)
+            setData({
                 nama : "",
                 umur : "",
                 jenisKelamin : "Pria"
             })
         } else {
-            alert("Data masih gak lengkap")
+            alert("Data masih ada yang kosong")
         }
-
     }
 
-    handleBukaInput = () => {
-        this.setState({
-            editing: false
-        })
+    const handleBukaInput = () => {
+        setEditing(false)
     }
 
-    handleTutupInput = () => {
-        this.setState({
-            editing: true
-        })
+    const handleTutupInput = () => {
+        setEditing(true)
     }
-    
-    
-    render(){
 
-        const viewMode = {}
-        const editMode = {}
+    const viewMode = {};
+    const editMode = {};
 
-        if (this.state.editing) {
-            viewMode.display = 'none'
-        } else {
-            editMode.display = 'none'
-        }
-        
-        return (
-            <div>
-                <div onSubmit={() => {}} style={viewMode}>
-                    <p>Masukan nama Anda</p>
-                    <input type="text" placeholder="Nama anda..." value={this.state.nama} name="nama" onChange={this.onChange}></input>
-                    
-                    <p>Masukan umur Anda</p>
-                    <input type="number" placeholder="Umur anda..." value={this.state.umur} name="umur" onChange={this.onChange}></input>
-                    
-                    <p>Masukkan Jenis Kelamin Anda</p>
-                    <select onChange={this.onChange} name="jenisKelamin">
-                        <option value="Pria" selected>Pria</option>
-                        <option value="Wanita">Wanita</option>
-                    </select>
-                    
-                    <button onClick={this.handleSubmit}>Submit</button>
-                    <button onClick={this.handleTutupInput}>Selesai</button>
-                </div>
-                <button onClick={this.handleBukaInput} style={editMode}>Masukan nama Penumpang</button>
+    if (editing) {
+        viewMode.display = "none";
+    } else {
+        editMode.display = "none";
+    }
+
+    return (
+        <div style={{marginTop: "20px"}}>
+            <div onSubmit={() => {}} style={viewMode}>
+                <p>Masukkan Nama Anda</p>
+                <input type="text" placeholder="Nama anda..." value={data.nama} name="nama" onChange={onChange}></input>
+
+                <p>Masukkan Umur Anda</p>
+                <input type="number" placeholder="Umur anda..." value={data.umur} name="umur" onChange={onChange}></input>
+
+                <p>Masukkan Jenis Kelamin Anda</p>
+                <select onChange={onChange} name="jenisKelamin">
+                    <option value="Pria" selected>Pria</option>
+                    <option value="Wanita">Wanita</option>
+                </select>
+
+                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleTutupInput}>Selesai</button>
             </div>
-        )
-    }
+            <button onClick={handleBukaInput} style={editMode}>Masukkan Nama Penumpang</button>
+        </div>
+    )
 }
 
 export default PassengerInput
