@@ -5,7 +5,7 @@ export default function ToDo({ item, deleteToDo, toggleToDoStatus }) {
         <tr className={style.row}>
             <td>
                 <input
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer" , marginRight: "5px"}}
                 defaultChecked={item.completed ? true : false}
                 type="checkbox"
                 onClick={() => toggleToDoStatus(item.id)}
