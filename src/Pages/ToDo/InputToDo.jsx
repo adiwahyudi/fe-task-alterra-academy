@@ -1,7 +1,11 @@
 import style from './Components.module.css'
 import { useState } from "react"
+import { useDispatch } from 'react-redux'
+import { addToDo } from '../../store/toDoSlice'
 
-function InputToDo (props){
+function InputToDo(){
+    const dispatch = useDispatch()
+
     const [data, setData] = useState({
         title: "",
         completed: false,
@@ -21,11 +25,11 @@ function InputToDo (props){
             title: data.title,
             completed: data.completed,
           };
-          props.addToDo(newData);
+          dispatch(addToDo(newData))
           setData({
             title: "",
             completed: false,
-          });
+          }); 
         } else {
           alert("Title tidak boleh kosong");
         }
@@ -33,8 +37,19 @@ function InputToDo (props){
 
       return (
           <div className={style.inputContainer}>
-              <input type="text" placeholder="Add todo.." name="title" className={style.input} value={data.title} onChange={onChange}/>
-              <button onClick={handleSubmit} className={style.handleSubmit}>Submit</button>
+              <input 
+                type="text" 
+                placeholder="Add todo.." 
+                name="title" 
+                className={style.input} 
+                value={data.title} 
+                onChange={onChange}
+              />
+              <button 
+                className={style.handleSubmit} 
+                onClick={handleSubmit}>
+                Submit
+              </button>
           </div>
       )
 }
