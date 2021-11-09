@@ -22,9 +22,22 @@ label {
 
 .btn {
   flex-direction: row;
+  margin-left: 10px;
+  padding: 5px 25px;
+  font-weight: bold;
+  color: white;
+  background-color: #3a811d;
+  border-radius: 5px;
+  border: #3a811d;
+}
+.btn:hover {
+  background-color: #47b91a;
 }
 
-.errorMessage {
+.btnReset {
+  background-color: #ed3833;
+}
+/* .errorMessage {
   color: red;
   margin-bottom: 10px;
-}
+} */
