@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { addToDo } from '../../store/toDoSlice'
 
-function InputToDo(){
+export default function InputToDo(props){
     const dispatch = useDispatch()
 
     const [data, setData] = useState({
@@ -21,7 +21,7 @@ function InputToDo(){
         e.preventDefault();
         const isEmpty = data.title
         if (isEmpty) {
-          const newData = {
+          const newData = { 
             title: data.title,
             completed: data.completed,
           };
@@ -54,4 +54,3 @@ function InputToDo(){
       )
 }
 
-export default InputToDo    

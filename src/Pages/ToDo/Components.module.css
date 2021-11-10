@@ -84,31 +84,17 @@
   margin-left: 10px;
 }
 
-.container-404 {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-.title404 {
-  font-size: 80px;
-}
-.message404 {
-  font-size: 40px;
-}
-.not-found {
-  padding: 230px;
-  text-align: center;
-}
-.btn-back {
-  font-weight: 600p;
+
+.buttonDelete {
+  font-size: 12px;
+  padding: 10px 3px;
+  border-radius: 30px;
+  font-weight: bold;
   color: white;
-  background-color: #5e7fdc;
-  border: #5e7fdc;
-  border-radius: 5px;
-  margin-top: 10px;
-  padding: 10px 30px;
+  background-color: rgb(209, 13, 13);
+  border: rgb(172, 4, 4);
 }
 
-.btn-back:hover {
-  background-color: #0d4dff;
+.buttonDelete:hover {
+  background-color: rgb(255, 0, 0);
 }

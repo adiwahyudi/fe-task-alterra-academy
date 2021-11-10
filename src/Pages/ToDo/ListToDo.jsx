@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggleToDoStatus, deleteToDo }  from '../../store/toDoSlice'
 import style from './Components.module.css'
 
-const ListToDo = () => {
-    const dispatch = useDispatch();
+const ListToDo = (props) => {
+
     const todos = useSelector((state) => state.todo.todos)
+    const dispatch = useDispatch()
 
     return (
         <div className={style.container}>   

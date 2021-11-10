@@ -5,7 +5,7 @@ import storage from "redux-persist/lib/storage";
 import toDoSlice from "./toDoSlice";
 
 const reducer = combineReducers({
-     toDo: toDoSlice,
+     todo: toDoSlice,
 })
 
 const persistConfig = {
