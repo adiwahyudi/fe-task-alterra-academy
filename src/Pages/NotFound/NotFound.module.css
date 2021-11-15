@@ -1,0 +1,28 @@
+.container-404 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.title404 {
+  font-size: 80px;
+}
+.message404 {
+  font-size: 40px;
+}
+.not-found {
+  padding: 230px;
+  text-align: center;
+}
+.btn-back {
+  font-weight: 600p;
+  color: white;
+  background-color: #5e7fdc;
+  border: #5e7fdc;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 30px;
+}
+
+.btn-back:hover {
+  background-color: #0d4dff;
+}
