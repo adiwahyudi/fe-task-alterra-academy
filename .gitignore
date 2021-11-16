@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules
 
 # testing
 /coverage
@@ -21,6 +22,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# alterra zip
-I Wayan Adi Wahyudi - Intro React.zip
