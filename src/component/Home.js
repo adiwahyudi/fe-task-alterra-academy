@@ -3,7 +3,7 @@ import { useState } from "react";
 import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import LoadingSvg from "./LoadingSvg";
 
 const getAllAnggota = gql`
@@ -17,9 +17,20 @@ const getAllAnggota = gql`
     }
   
 `
-function Home() {
 
-    const [getAnggota, {data,loading,error}] = useLazyQuery(getAllAnggota)
+const getAnggotaById = gql`
+    query MyQuery($_eq: Int = 1) {
+        anggota(where: {id: {_eq: $_eq}}) {
+        nama
+        umur
+        jenis_kelamin
+        id
+        }
+    }
+`
+function Home() {   
+    const {data,loading,error} = useQuery(getAllAnggota)
+    // const [getAnggotaId, {data,loading,error}] = useLazyQuery(getAnggotaById)
     const [passenger, setPassenger] = useState([]);
 
     if (loading) {  
@@ -39,17 +50,17 @@ function Home() {
         const newData = [newUser, ...passenger];
         setPassenger(newData);
     };
-    const getData = () => {
-        getAnggota()
-        setPassenger(data?.passenger)
-    }
+    // const getData = () => {
+    //     getAnggota()
+    //     setPassenger(data?.passenger)
+    // }
 
     return (
         <div>
             <div>
                 <Header />
-                <button onClick={getData}>Get Data Here</button>
-                <ListPassenger passenger={passenger} hapusPengunjung={hapusPengunjung} />
+                {/* <button onClick={getData}>Get Data Here</button> */}
+                <ListPassenger data={data} hapusPengunjung={hapusPengunjung} />
                 <PassengerInput tambahPengunjung={tambahPengunjung} />
             </div>
         </div>

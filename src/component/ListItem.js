@@ -1,7 +1,8 @@
 import "./Home.css"
 const ListItem = (props) => {
 
-    const { id, nama, umur, jenis_kelamin } = props.data
+    const { id, nama, umur, jenis_kelamin } = props
+
 
     return (
         <tr>
