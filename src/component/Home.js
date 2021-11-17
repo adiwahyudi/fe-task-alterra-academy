@@ -29,6 +29,7 @@ const getAnggotaById = gql`
     }
 `
 function Home() {   
+
     // const {data,loading,error} = useQuery(getAllAnggota)
     const [getAnggotaId, {data,loading,error}] = useLazyQuery(getAnggotaById)
     const [userId,setUserId] = useState('')
@@ -51,6 +52,7 @@ function Home() {
         const newData = [newUser, ...passenger];
         setPassenger(newData);
     };
+
     const getDataById = () => {
         getAnggotaId({variables:{
             _eq: userId
@@ -68,7 +70,7 @@ function Home() {
         <div>
             <div>
                 <Header />
-                <input value={userId} onChange={onChangeId}/>
+                <input value={userId} onChange={onChangeId} placeholder="input id here.."/>
                 <tr></tr>
                 <button onClick={getDataById}>Get Data By ID Here</button>
                 <ListPassenger data={data} hapusPengunjung={hapusPengunjung} />
