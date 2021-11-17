@@ -19,18 +19,19 @@ const getAllAnggota = gql`
 `
 
 const getAnggotaById = gql`
-    query MyQuery($_eq: Int = 1) {
+    query MyQuery($_eq: Int!) {
         anggota(where: {id: {_eq: $_eq}}) {
+        id
         nama
         umur
         jenis_kelamin
-        id
         }
     }
 `
 function Home() {   
-    const {data,loading,error} = useQuery(getAllAnggota)
-    // const [getAnggotaId, {data,loading,error}] = useLazyQuery(getAnggotaById)
+    // const {data,loading,error} = useQuery(getAllAnggota)
+    const [getAnggotaId, {data,loading,error}] = useLazyQuery(getAnggotaById)
+    const [userId,setUserId] = useState('')
     const [passenger, setPassenger] = useState([]);
 
     if (loading) {  
@@ -50,16 +51,26 @@ function Home() {
         const newData = [newUser, ...passenger];
         setPassenger(newData);
     };
-    // const getData = () => {
-    //     getAnggota()
-    //     setPassenger(data?.passenger)
-    // }
+    const getDataById = () => {
+        getAnggotaId({variables:{
+            _eq: userId
+        }})
+        setPassenger(data?.passenger)
+    }
+
+    const onChangeId = (e) => {
+        if (e.target) {
+            setUserId(e.target.value)
+        }
+    }
 
     return (
         <div>
             <div>
                 <Header />
-                {/* <button onClick={getData}>Get Data Here</button> */}
+                <input value={userId} onChange={onChangeId}/>
+                <tr></tr>
+                <button onClick={getDataById}>Get Data By ID Here</button>
                 <ListPassenger data={data} hapusPengunjung={hapusPengunjung} />
                 <PassengerInput tambahPengunjung={tambahPengunjung} />
             </div>
