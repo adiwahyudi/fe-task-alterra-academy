@@ -3,18 +3,29 @@ import { useState } from "react";
 import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
+import { gql, useLazyQuery, useMutation, useQuery, useSubscription } from '@apollo/client'
 import LoadingSvg from "./LoadingSvg";
 
-const getAllAnggota = gql`
-    query MyQuery {
-        anggota{
-            id
-            nama
-            umur
-            jenis_kelamin
-        }
+// const getAllAnggota = gql`
+//     query MyQuery {
+//         anggota{
+//             id
+//             nama
+//             umur
+//             jenis_kelamin
+//         }
+//     }
+// `
+
+const getAllAnggotaSubs = gql`
+subscription MySubscription {
+    anggota {
+      id
+      jenis_kelamin
+      nama
+      umur
     }
+  }
   
 `
 
@@ -58,23 +69,20 @@ const updateAnggotaGQL = gql`
         }
     }
 `
-function Home() {   
+function Home() {
 
-    const {data,loading,error} = useQuery(getAllAnggota)
-    const [insertAnggota,{loading:loadingInsert}] = useMutation(addAnggotaGQL,{
-        refetchQueries:[getAllAnggota]
-    })
-    const [deleteAnggota,{loading:loadingDelete}] = useMutation(deleteAnggotaGQL,{
-        refetchQueries:[getAllAnggota]
-    })
+    const { data, loading, error } = useSubscription(getAllAnggotaSubs)
+    
+    const [insertAnggota, { loading: loadingInsert }] = useMutation(addAnggotaGQL)
+    const [deleteAnggota, { loading: loadingDelete }] = useMutation(deleteAnggotaGQL)
 
     // const [getAnggotaId, {data,loading,error}] = useLazyQuery(getAnggotaById)
     // const [passenger, setPassenger] = useState([]);
-    
-    const [userId,setUserId] = useState('')
 
-    if (loading || loadingInsert || loadingDelete) {  
-        return(<LoadingSvg/>)
+    const [userId, setUserId] = useState('')
+
+    if (loading || loadingInsert || loadingDelete) {
+        return (<LoadingSvg />)
     }
 
     if (error) {
@@ -83,33 +91,33 @@ function Home() {
     }
     const hapusPengunjung = (idx) => {
         deleteAnggota({
-            variables:{
-                _eq:idx
+            variables: {
+                _eq: idx
             }
         })
     };
 
     const tambahPengunjung = (newUser) => {
-        
-        
+
+
         insertAnggota({
-            variables:{
+            variables: {
                 nama: newUser.nama,
                 umur: newUser.umur,
                 jenis_kelamin: newUser.jenisKelamin
             }
         })
-    }   
+    }
 
     const editPengunjung = (newUser) => {
         insertAnggota({
-            variables:{
+            variables: {
                 nama: newUser.nama,
                 umur: newUser.umur,
                 jenis_kelamin: newUser.jenisKelamin
             }
         })
-    }   
+    }
     return (
         <div>
             <div>
@@ -119,6 +127,7 @@ function Home() {
                 {/* <button onClick={getDataById}>Get Data By ID Here</button> */}
                 <ListPassenger data={data} hapusPengunjung={hapusPengunjung} editPengunjung={editPengunjung} />
                 <PassengerInput tambahPengunjung={tambahPengunjung} />
+                {/* <ExampleBasicMutation/> */}
             </div>
         </div>
     );
