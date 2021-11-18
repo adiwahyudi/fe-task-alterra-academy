@@ -19,6 +19,7 @@ const ListPassenger = (props) => {
                         umur={item.umur}
                         jenis_kelamin={item.jenis_kelamin}
                         hapusPengunjung={props.hapusPengunjung}
+                        editPengunjung={props.editPengunjung}
                     />
                 ))}
             </table>
